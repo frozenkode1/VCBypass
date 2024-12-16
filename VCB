@@ -1,0 +1,68 @@
+-- Creates invisible gui for the vc bypass
+
+local VCBGUI = Instance.new("ScreenGui")
+local VCBFrame = Instance.new("Frame")
+local VCBButton = Instance.new("TextButton")
+
+--Properties of said gui and others:
+
+VCBGUI.Name = "VCBGUI"
+VCBGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+VCBGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+VCBGUI.ResetOnSpawn = false
+
+VCBFrame.Name = "VCBFrame"
+VCBFrame.Parent = VCBGUI
+VCBFrame.Active = true
+VCBFrame.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
+VCBFrame.BackgroundTransparency = 1.000
+VCBFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+VCBFrame.BorderSizePixel = 0
+VCBFrame.ClipsDescendants = true
+VCBFrame.Size = UDim2.new(1, 0, 1, 0)
+VCBFrame.Visible = false
+
+VCBButton.Name = "VCBButton"
+VCBButton.Parent = VCBFrame
+VCBButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+VCBButton.BackgroundTransparency = 1.000
+VCBButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+VCBButton.BorderSizePixel = 0
+VCBButton.Size = UDim2.new(1, 0, 1, 0)
+VCBButton.Font = Enum.Font.SourceSans
+VCBButton.Text = ""
+VCBButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+VCBButton.TextSize = 14.000
+
+-- VC bypass script:
+
+local function VCBScript() -- VCBButton.VCBScript 
+    local script = Instance.new('Script', VCBButton)
+
+    local frame = script.Parent.Parent
+    local gui = frame.Parent
+    local button = script.Parent
+
+    local VCS = game:GetService("VoiceChatService")
+    local VCI = game:GetService("VoiceChatInternal")
+
+    local function entered()
+        frame.Visible = false
+        -- gui.Enabled = false
+
+
+        VCS:joinVoice()
+    end
+
+    local function onVCSChanged(oState, nState)
+        if nState == Enum.VoiceChatState.Ended then
+            frame.Visible = true
+            -- gui.Enabled = true
+        end
+    end
+
+    button.MouseEnter:Connect(entered)
+    VCI.StateChanged:Connect(onVCSChanged)
+
+end
+coroutine.wrap(VCBScript)() 
