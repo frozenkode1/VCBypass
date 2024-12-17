@@ -1,68 +1,67 @@
--- Creates invisible gui for the vc bypass
+if not game.Players.LocalPlayer.PlayerGui:FindFirstChild("VCBGUI-347") then
 
-local VCBGUI = Instance.new("ScreenGui")
-local VCBFrame = Instance.new("Frame")
-local VCBButton = Instance.new("TextButton")
+    -- Instances:
 
---Properties of said gui and others:
+    local VCBGUI = Instance.new("ScreenGui")
+    local VCBFrame = Instance.new("Frame")
 
-VCBGUI.Name = "VCBGUI"
-VCBGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-VCBGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-VCBGUI.ResetOnSpawn = false
+    --Properties:
 
-VCBFrame.Name = "VCBFrame"
-VCBFrame.Parent = VCBGUI
-VCBFrame.Active = true
-VCBFrame.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
-VCBFrame.BackgroundTransparency = 1.000
-VCBFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-VCBFrame.BorderSizePixel = 0
-VCBFrame.ClipsDescendants = true
-VCBFrame.Size = UDim2.new(1, 0, 1, 0)
-VCBFrame.Visible = false
+    VCBGUI.Name = "VCBGUI-347"
+    VCBGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-VCBButton.Name = "VCBButton"
-VCBButton.Parent = VCBFrame
-VCBButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-VCBButton.BackgroundTransparency = 1.000
-VCBButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-VCBButton.BorderSizePixel = 0
-VCBButton.Size = UDim2.new(1, 0, 1, 0)
-VCBButton.Font = Enum.Font.SourceSans
-VCBButton.Text = ""
-VCBButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-VCBButton.TextSize = 14.000
+    VCBFrame.Name = "VCBFrame"
+    VCBFrame.Parent = VCBGUI
+    VCBFrame.Active = true
+    VCBFrame.BackgroundTransparency = 1.000
+    VCBFrame.Size = UDim2.new(1, 0, 1, 0)
+    VCBFrame.Visible = false
 
--- VC bypass script:
+    -- Scripts:
+    local function VCBScript() -- VCBButton.VCBScript 
 
-local function VCBScript() -- VCBButton.VCBScript 
-    local script = Instance.new('Script', VCBButton)
+        local VCS = game:GetService("VoiceChatService")
+        local VCI = game:GetService("VoiceChatInternal")
 
-    local frame = script.Parent.Parent
-    local gui = frame.Parent
-    local button = script.Parent
+        local function entered()
+            VCBFrame.Visible = false
 
-    local VCS = game:GetService("VoiceChatService")
-    local VCI = game:GetService("VoiceChatInternal")
-
-    local function entered()
-        frame.Visible = false
-        -- gui.Enabled = false
-
-
-        VCS:joinVoice()
-    end
-
-    local function onVCSChanged(oState, nState)
-        if nState == Enum.VoiceChatState.Ended then
-            frame.Visible = true
-            -- gui.Enabled = true
+            wait(0.1)
+            VCS:joinVoice()
+            wait(2)
         end
+
+        local function onVCSChanged(oState, nState)
+            if nState == Enum.VoiceChatState.Ended then
+                VCBFrame.Visible = true
+
+            end
+        end
+
+        VCBFrame.MouseEnter:Connect(entered)
+        VCI.StateChanged:Connect(onVCSChanged)
+
     end
+    coroutine.wrap(VCBScript)()
 
-    button.MouseEnter:Connect(entered)
-    VCI.StateChanged:Connect(onVCSChanged)
+    -- Popup of it having been loaded
 
+    local Popup = Instance.new("Frame")
+    local TextLabel = Instance.new("TextLabel")
+
+    Popup.Name = "Popup"
+    Popup.Parent = VCBGUI
+    Popup.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Popup.BackgroundTransparency = 0.500
+    Popup.Position = UDim2.new(0.841824651, 0, 0.811678827, 0)
+    Popup.Size = UDim2.new(0, 260, 0, 34)
+
+    TextLabel.Parent = Popup
+    TextLabel.BackgroundTransparency = 1.000
+    TextLabel.Size = UDim2.new(1, 0, 1, 0)
+    TextLabel.Text = "VCBypass loaded"
+    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+    wait(4)
+    Popup:Destroy()
 end
-coroutine.wrap(VCBScript)() 
