@@ -1,67 +1,68 @@
-if not game.Players.LocalPlayer.PlayerGui:FindFirstChild("VCBGUI-347") then
-
-    -- Instances:
-
-    local VCBGUI = Instance.new("ScreenGui")
-    local VCBFrame = Instance.new("Frame")
-
-    --Properties:
-
-    VCBGUI.Name = "VCBGUI-347"
-    VCBGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-    VCBFrame.Name = "VCBFrame"
-    VCBFrame.Parent = VCBGUI
-    VCBFrame.Active = true
-    VCBFrame.BackgroundTransparency = 1.000
-    VCBFrame.Size = UDim2.new(1, 0, 1, 0)
-    VCBFrame.Visible = false
-
-    -- Scripts:
-    local function VCBScript() -- VCBButton.VCBScript 
-
-        local VCS = game:GetService("VoiceChatService")
-        local VCI = game:GetService("VoiceChatInternal")
-
-        local function entered()
-            VCBFrame.Visible = false
-
-            wait(0.1)
-            VCS:joinVoice()
-            wait(2)
-        end
-
-        local function onVCSChanged(oState, nState)
-            if nState == Enum.VoiceChatState.Ended then
-                VCBFrame.Visible = true
-
-            end
-        end
-
-        VCBFrame.MouseEnter:Connect(entered)
-        VCI.StateChanged:Connect(onVCSChanged)
-
-    end
-    coroutine.wrap(VCBScript)()
-
-    -- Popup of it having been loaded
-
-    local Popup = Instance.new("Frame")
-    local TextLabel = Instance.new("TextLabel")
-
-    Popup.Name = "Popup"
-    Popup.Parent = VCBGUI
-    Popup.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    Popup.BackgroundTransparency = 0.500
-    Popup.Position = UDim2.new(0.841824651, 0, 0.811678827, 0)
-    Popup.Size = UDim2.new(0, 260, 0, 34)
-
-    TextLabel.Parent = Popup
-    TextLabel.BackgroundTransparency = 1.000
-    TextLabel.Size = UDim2.new(1, 0, 1, 0)
-    TextLabel.Text = "VCBypass loaded"
-    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-
-    wait(4)
-    Popup:Destroy()
+if game.CoreGui:FindFirstChild("VCBG") then
+	return
 end
+
+-- Instances:
+
+local VCBGUI = Instance.new("ScreenGui")
+local VCBFrame = Instance.new("Frame")
+
+--Properties:
+
+VCBGUI.Name = "VCBG"
+VCBGUI.Parent = game.CoreGui
+VCBGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+VCBFrame.Name = "VCBFrame"
+VCBFrame.Parent = VCBGUI
+VCBFrame.Active = true
+VCBFrame.BackgroundTransparency = 1.000
+VCBFrame.Size = UDim2.new(1, 0, 1, 0)
+VCBFrame.Visible = false
+
+-- Scripts:
+local function VCBScript() -- VCBButton.VCBScript 
+
+	local VCS = game:GetService("VoiceChatService")
+	local VCI = game:GetService("VoiceChatInternal")
+
+	local function entered()
+		VCBFrame.Visible = false
+
+		VCS:joinVoice()
+		task.wait(0.1)
+	end
+
+	local function onVCSChanged(oState, nState)
+		if nState == Enum.VoiceChatState.Ended then
+			VCBFrame.Visible = true
+
+		end
+	end
+
+	VCBFrame.MouseEnter:Connect(entered)
+	VCI.StateChanged:Connect(onVCSChanged)
+
+end
+coroutine.wrap(VCBScript)()
+
+-- Popup of it having been loaded
+
+local Popup = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+
+Popup.Name = "Popup"
+Popup.Parent = VCBGUI
+Popup.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Popup.BackgroundTransparency = 0.500
+Popup.Position = UDim2.new(0.841824651, 0, 0.811678827, 0)
+Popup.Size = UDim2.new(0, 260, 0, 34)
+
+TextLabel.Parent = Popup
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Size = UDim2.new(1, 0, 1, 0)
+TextLabel.Text = "VCBypass loaded"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+task.wait(4)
+Popup:Destroy()
