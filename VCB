@@ -20,6 +20,7 @@ VCBFrame.BackgroundTransparency = 1.000
 VCBFrame.Size = UDim2.new(1, 0, 1, 0)
 VCBFrame.Visible = false
 
+task.wait(0.1)
 -- Scripts:
 local function VCBScript() -- VCBButton.VCBScript 
 
@@ -29,8 +30,9 @@ local function VCBScript() -- VCBButton.VCBScript
 	local function entered()
 		VCBFrame.Visible = false
 
-		VCS:joinVoice()
 		task.wait(0.1)
+		VCS:joinVoice()
+		task.wait(0.5)
 	end
 
 	local function onVCSChanged(oState, nState)
