@@ -20,7 +20,7 @@ VCBFrame.BackgroundTransparency = 1.000
 VCBFrame.Size = UDim2.new(1, 0, 1, 0)
 VCBFrame.Visible = false
 
-task.wait(1)
+task.wait(0.1)
 -- Scripts:
 local function VCBScript() -- VCBButton.VCBScript 
 
