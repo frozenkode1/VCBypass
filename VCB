@@ -1,4 +1,4 @@
-if game:WaitForChild("CoreGui"):FindFirstChild("VCBG") then
+if game:FindFirstChild("VCBG") then
 	return
 end
 
