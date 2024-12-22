@@ -1,4 +1,4 @@
-if game.CoreGui:FindFirstChild("VCBG") then
+if game:WaitForChild("CoreGui"):FindFirstChild("VCBG") then
 	return
 end
 
@@ -10,7 +10,7 @@ local VCBFrame = Instance.new("Frame")
 --Properties:
 
 VCBGUI.Name = "VCBG"
-VCBGUI.Parent = game.CoreGui
+VCBGUI.Parent = game:WaitForChild("CoreGui")
 VCBGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 VCBFrame.Name = "VCBFrame"
