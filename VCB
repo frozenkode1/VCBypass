@@ -1,4 +1,4 @@
-if game:FindFirstChild("VCBG") then
+if game.CoreGui:FindFirstChild("VCBG") then
 	return
 end
 
