@@ -42,7 +42,9 @@ local function VCBScript() -- VCBButton.VCBScript
 
 		if nState == Enum.VoiceChatState.Failed then
 			vcL
+                        print("Retrying voice chat (triangle of death)")
 			vcJ
+
 		end
 	end
 
