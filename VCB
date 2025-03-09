@@ -11,7 +11,7 @@ local VCBFrame = Instance.new("Frame")
 
 VCBGUI.Name = "VCBG"
 VCBGUI.Parent = game:WaitForChild("CoreGui")
-VCBGUI.ResetOnSpawn = false
+--VCBGUI.ResetOnSpawn = false
 VCBGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 VCBFrame.Name = "VCBFrame"
@@ -37,10 +37,10 @@ local function VCBScript() -- VCBButton.VCBScript
 			VCBFrame.Visible = true
 		end
 
-		if nState == Enum.VoiceChatState.Failed then
-			VCI:Leave()
-                        print("Retrying voice chat (triangle of death)")
-			VCS:joinVoice()
+		--if nState == Enum.VoiceChatState.Failed then
+			--VCI:Leave()
+                       	--print("Retrying voice chat (triangle of death)")
+			--VCS:joinVoice()
 		end
 	end
 
