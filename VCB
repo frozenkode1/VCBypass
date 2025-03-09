@@ -27,12 +27,9 @@ local function VCBScript() -- VCBButton.VCBScript
 	local VCS = game:GetService("VoiceChatService")
 	local VCI = game:GetService("VoiceChatInternal")
 
-	local vcJ = VCS:joinVoice()
-	local vcL = VCI:Leave()
-
 	local function entered()
 		VCBFrame.Visible = false
-		vcJ
+		VCS:joinVoice()
 	end
 
 	local function onVCSChanged(oState, nState)
@@ -41,10 +38,9 @@ local function VCBScript() -- VCBButton.VCBScript
 		end
 
 		if nState == Enum.VoiceChatState.Failed then
-			vcL
+			VCI:Leave()
                         print("Retrying voice chat (triangle of death)")
-			vcJ
-
+			VCS:joinVoice()
 		end
 	end
 
