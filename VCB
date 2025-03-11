@@ -38,7 +38,7 @@ local function VCBScript() -- VCBButton.VCBScript
 			VCBFrame.Visible = true
 		end
 
-		if nState == Enum.VoiceChatState.Failed then
+		elseif nState == Enum.VoiceChatState.Failed then
 			VCI:Leave()
                        	print("Retrying voice chat, triangle of death")
 			VCS:joinVoice()
