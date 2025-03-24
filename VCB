@@ -36,7 +36,6 @@ local function VCBScript() -- VCBButton.VCBScript
 	local function onVCSChanged(oState, nState)
 		if nState == Enum.VoiceChatState.Ended then
 			VCBFrame.Visible = true
-		end
 
 		elseif nState == Enum.VoiceChatState.Failed then
 			VCI:Leave()
